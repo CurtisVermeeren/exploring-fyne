@@ -1,10 +1,13 @@
 version: '3.8'
 services:
   go-app:
-    container_name: go-devcontainer-scaffold
+    container_name: exploring-fyne
     build: .
     volumes:
       - ../:/app:cached
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=host.docker.internal:0.0
     ports:
       - 8080:8080
     command: /bin/sh -c "while sleep 1000; do :; done"

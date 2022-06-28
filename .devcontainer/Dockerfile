@@ -14,7 +14,12 @@ RUN go install github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest \
     && go install honnef.co/go/tools/cmd/staticcheck@latest \ 
     && go install golang.org/x/tools/gopls@latest \
     && GO111MODULE=on go install golang.org/x/tools/gopls@latest
-    
+
+# Install gcc and graphics library header files needed for Fyne
+RUN apt-get update
+RUN apt-get install gcc libgl1-mesa-dev xorg-dev mesa-utils and libgl1-mesa-glx -y
+RUN export LIBGL_ALWAYS_INDIRECT=0 
+
 # Uses "robbyrussell" theme (original Oh My Zsh theme), with no plugins
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" -- \
     -t robbyrussell
